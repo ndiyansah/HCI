@@ -11,6 +11,9 @@ export const GET_POKEMON_TYPE = `GET_POKEMON_TYPE`;
 export const GET_POKEMON_TYPE_SUCCESS = `GET_POKEMON_TYPE_SUCCESS`;
 export const GET_POKEMON_TYPE_FAIL = `GET_POKEMON_TYPE_FAIL`;
 
+export const GET_POKELIST_AND_RESET = `GET_POKELIST_AND_RESET`;
+
+
 export const getPokemonList = (page = 1) => async dispatch => {
   dispatch({
     type: GET_POKELIST
@@ -82,7 +85,8 @@ export const getPokemonTypes = () => async dispatch => {
 
 export const getPokemonByType = type => async dispatch => {
   dispatch({
-    type: GET_POKELIST
+    type: GET_POKELIST_AND_RESET
+
   });
 
   try {

@@ -4,7 +4,8 @@ import {
   GET_POKEMON_DETAIL,
   GET_POKEMON_DETAIL_SUCCESS,
   GET_POKEMON_TYPE,
-  GET_POKEMON_TYPE_SUCCESS
+  GET_POKEMON_TYPE_SUCCESS,
+  GET_POKELIST_AND_RESET
 } from "./actions";
 
 const initialState = {
@@ -35,6 +36,16 @@ export default (state = initialState, action) => {
         ...state,
         list: {
           ...state.list,
+          isLoading: true,
+          hasError: false
+        }
+      };
+    case GET_POKELIST_AND_RESET:
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          data: [],
           isLoading: true,
           hasError: false
         }

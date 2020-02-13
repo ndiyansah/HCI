@@ -6,6 +6,8 @@ import { bindActionCreators } from "redux";
 import PokemonChar from "./PokemonChar";
 import styled from "@emotion/styled";
 
+import { PropagateLoader } from "react-spinners";
+
 const HomeWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -23,6 +25,10 @@ class Home extends React.Component {
         {this.props.pokemons.data.map((pokemon, index) => (
           <PokemonChar detail={pokemon} id={index} key={pokemon.name} />
         ))}
+        <PropagateLoader
+          loading={this.props.pokemons.isLoading}
+          color="#ff416c"
+        />
       </HomeWrapper>
     );
   }
