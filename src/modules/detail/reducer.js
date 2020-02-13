@@ -7,7 +7,8 @@ const initialState = {
   isLoading: false,
   hasError: false,
   errorMessage: "",
-  data: {}
+  data: {},
+  specie: {}
 };
 
 export default (state = initialState, action) => {
@@ -22,7 +23,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        data: action.payload.data
+        data: action.payload.data,
+        specie: action.payload.specie
       };
     default:
       return state;

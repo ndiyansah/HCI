@@ -3,19 +3,32 @@ import { connect } from "react-redux";
 import styled from "@emotion/styled";
 import { getPokemonDetailPage } from "../../modules/detail/action";
 import { SyncLoader } from "react-spinners";
-import {
-  PokemonCard,
-  ImageWrapper,
-  PokemonImage,
-  PokemonInfo,
-  PokemonName,
-  PokemonType,
-  LoadingWrapper,
-  PokemonDetail as PokeDetail
-} from "../Home/PokemonChar";
+import { LoadingWrapper } from "../Home/PokemonChar";
+import PokemonCard from "./PokemonCard";
 
 const Wrapper = styled.div`
   margin: 0 3rem;
+`;
+
+const Detail = styled.div`
+  border: 1px solid pink;
+  padding: 1rem;
+  border-radius: 10px 0;
+  margin: 0.5rem;
+  background: #fff;
+`;
+
+const DetailTitle = styled.div`
+  font-weight: bold;
+  font-size: large;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+`;
+
+const DetailSubSmall = styled.div`
+  font-size: small;
+  color: #333;
+  text-transform: uppercase;
 `;
 
 class PokemonDetail extends React.Component {
@@ -30,9 +43,10 @@ class PokemonDetail extends React.Component {
 
   render() {
     const detail = this.props.detail.data;
+    const specie = this.props.detail.specie;
 
     return (
-      <Wrapper>
+      <div className="container">
         {this.props.detail.isLoading ||
         this.props.detail.data.name === undefined ? (
           <LoadingWrapper>
@@ -41,42 +55,61 @@ class PokemonDetail extends React.Component {
         ) : (
           <div className="row">
             <div className="col-md-3">
-              <PokemonCard>
-                <ImageWrapper>
-                  <PokemonImage
-                    src={`https://img.pokemondb.net/artwork/${detail.name}.jpg`}
-                    alt={this.convertToNameCase(detail.name)}
-                  />
-                </ImageWrapper>
-                <PokemonInfo>
-                  <PokemonName>
-                    {this.convertToNameCase(detail.name)}
-                  </PokemonName>
-                  #{detail.id}
-                </PokemonInfo>
-                <PokemonType>
-                  <small>TYPE</small>
-                  <div>
+              <PokemonCard
+                name={detail.name}
+                id={detail.id}
+                description={specie.flavor_text_entries[2].flavor_text}
+              />
+            </div>
+            <div className="col-md-9">
+              <Detail>
+                <DetailTitle>Details</DetailTitle>
+
+                <div className="row">
+                  <div className="col-md-6 p-4">
+                    <DetailSubSmall>Height</DetailSubSmall>
+                    <span>{detail.height / 10}m</span>
+                    <DetailSubSmall>Weight</DetailSubSmall>
+                    <span>{detail.weight / 10}kg</span>
+                    <DetailSubSmall>Type</DetailSubSmall>
                     {detail.types.map(item => (
-                      <span>{item.type.name}</span>
+                      <span className="d-block text-capitalize">
+                        {item.type.name}
+                      </span>
                     ))}
                   </div>
-                </PokemonType>
-                <PokeDetail>
-                  <div>
-                    <small>HEIGHT</small>
-                    <span>{detail.height / 10}m</span>
+                  <div className="col-md-6 p-4">
+                    <DetailSubSmall>Category</DetailSubSmall>
+                    <span>{specie.genera[2].genus}</span>
+                    <DetailSubSmall>Abilities</DetailSubSmall>
+                    {detail.abilities.map(item => (
+                      <span className="d-block text-capitalize">
+                        {item.ability.name}
+                      </span>
+                    ))}
                   </div>
-                  <div>
-                    <small>WEIGHT</small>
-                    <span>{detail.weight / 10}kg</span>
+                </div>
+
+                <DetailTitle>Stats</DetailTitle>
+                {detail.stats.map(item => (
+                  <div className="m-2">
+                    <DetailSubSmall>{item.stat.name}</DetailSubSmall>
+                    <div class="progress">
+                      <div
+                        className="progress-bar"
+                        style={{
+                          width: `${item.base_stat}%`,
+                          background: `linear-gradient(to left, #ff6a00, #ee0979)`
+                        }}
+                      />
+                    </div>
                   </div>
-                </PokeDetail>
-              </PokemonCard>
+                ))}
+              </Detail>
             </div>
           </div>
         )}
-      </Wrapper>
+      </div>
     );
   }
 }
