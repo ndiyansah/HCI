@@ -6,10 +6,6 @@ import { SyncLoader } from "react-spinners";
 import { LoadingWrapper, PokemonTypeStyled } from "../Home/styled";
 import PokemonCard from "./PokemonCard";
 
-const Wrapper = styled.div`
-  margin: 0 3rem;
-`;
-
 const Detail = styled.div`
   border: 1px solid pink;
   padding: 1rem;
