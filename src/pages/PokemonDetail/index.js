@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "@emotion/styled";
 import { getPokemonDetailPage } from "../../modules/detail/action";
 import { SyncLoader } from "react-spinners";
-import { LoadingWrapper } from "../Home/PokemonChar";
+import { LoadingWrapper, PokemonTypeStyled } from "../Home/styled";
 import PokemonCard from "./PokemonCard";
 
 const Wrapper = styled.div`
@@ -76,11 +76,18 @@ class PokemonDetail extends React.Component {
                     <DetailSubSmall>Weight</DetailSubSmall>
                     <span>{detail.weight / 10}kg</span>
                     <DetailSubSmall>Type</DetailSubSmall>
-                    {detail.types.map(item => (
-                      <span className="d-block text-capitalize">
-                        {item.type.name}
-                      </span>
-                    ))}
+                    <PokemonTypeStyled
+                      style={{
+                        display: "inline"
+                        // marginRight: "5px"
+                      }}
+                    >
+                      {detail.types.map(item => (
+                        <span className={`${item.type.name} mr-2`}>
+                          {item.type.name}
+                        </span>
+                      ))}
+                    </PokemonTypeStyled>
                   </div>
                   <div className="col-md-6 p-4">
                     <DetailSubSmall>Category</DetailSubSmall>

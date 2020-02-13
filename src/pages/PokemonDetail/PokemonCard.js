@@ -8,7 +8,7 @@ import {
   PokemonImage,
   PokemonInfo,
   PokemonName
-} from "../Home/PokemonChar";
+} from "../Home/styled";
 
 const PokemonDesc = styled.div`
   padding: 1rem;
