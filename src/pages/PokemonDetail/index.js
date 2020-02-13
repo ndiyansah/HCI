@@ -45,6 +45,10 @@ class PokemonDetail extends React.Component {
     const detail = this.props.detail.data;
     const specie = this.props.detail.specie;
 
+    const englishDescription =
+      specie.flavor_text_entries &&
+      specie.flavor_text_entries.filter(item => item.language.name === "en")[0];
+
     return (
       <div className="container">
         {this.props.detail.isLoading ||
@@ -58,7 +62,7 @@ class PokemonDetail extends React.Component {
               <PokemonCard
                 name={detail.name}
                 id={detail.id}
-                description={specie.flavor_text_entries[2].flavor_text}
+                description={englishDescription.flavor_text}
               />
             </div>
             <div className="col-md-9">
