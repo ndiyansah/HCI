@@ -3,12 +3,11 @@ import styled from "@emotion/styled";
 
 import { connect } from "react-redux";
 
-import { getPokemonTypes, getPokemonByType } from "../../modules/actions";
-
+import { getPokemonTypes, getPokemonByType } from "../../modules/types/action";
 
 const SelectStyled = styled.button`
-  padding: 5px 10px;
   margin: auto 3rem;
+  padding: 5px 10px;
   font-size: small;
   border: none;
   color: #fff;
@@ -37,7 +36,7 @@ const DropdownList = styled.div`
   padding: 10px;
   width: ${props => (!props.isActive ? "120px" : "300px")};
   left: 3rem;
-  border-radius:  0 6px 6px 6px;
+  border-radius: 0 6px 6px 6px;
   display: flex;
   flex-wrap: wrap;
 `;
