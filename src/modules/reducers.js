@@ -1,4 +1,9 @@
-import { GET_POKELIST, GET_POKELIST_SUCCESS } from "./actions";
+import {
+  GET_POKELIST,
+  GET_POKELIST_SUCCESS,
+  GET_POKEMON_DETAIL,
+  GET_POKEMON_DETAIL_SUCCESS
+} from "./actions";
 
 const initialState = {
   list: {
@@ -40,6 +45,42 @@ export default (state = initialState, action) => {
           }
         }
       };
+    case GET_POKEMON_DETAIL:
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          data: state.list.data.map((item, index) => {
+            if (index === action.payload.id) {
+              return {
+                ...item,
+                isLoading: true
+              };
+            }
+
+            return item;
+          })
+        }
+      };
+    case GET_POKEMON_DETAIL_SUCCESS:
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          data: state.list.data.map((item, index) => {
+            if (index === action.payload.id) {
+              return {
+                ...item,
+                isLoading: false,
+                ...action.payload.data
+              };
+            }
+
+            return item;
+          })
+        }
+      };
+
     default:
       return state;
   }

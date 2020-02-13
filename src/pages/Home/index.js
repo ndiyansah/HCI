@@ -18,8 +18,8 @@ class Home extends React.Component {
   render() {
     return (
       <HomeWrapper>
-        {this.props.pokemons.data.map(pokemon => (
-          <PokemonChar name={pokemon.name} />
+        {this.props.pokemons.data.map((pokemon, index) => (
+          <PokemonChar name={pokemon.name} id={index} key={index} />
         ))}
       </HomeWrapper>
     );

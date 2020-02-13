@@ -1,14 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "@emotion/styled";
+import { getPokemon } from "../../modules/actions";
+
+import { connect } from "react-redux";
 
 const PokemonCard = styled.div`
-  /* padding: 1rem; */
+  background: #fff;
   display: block;
   box-shadow: 0 5px 5px rgba(109, 213, 237, 0.2);
   min-width: 200px;
   margin: 0.5rem;
-  border-radius: 5px 0 5px 0;
+  border-radius: 10px 2px;
+  border: 1px solid pink;
 `;
 
 const ImageWrapper = styled.div`
@@ -25,7 +28,7 @@ const PokemonImage = styled.img`
 `;
 
 const PokemonInfo = styled.div`
-  background: linear-gradient(to bottom right, #bc4e9c, #f80759);
+  background: linear-gradient(to bottom right, #ee0979, #ff6a00);
   color: #fff;
   padding: 1rem;
   border-radius: 10px 0;
@@ -38,9 +41,9 @@ const PokemonName = styled.div`
 `;
 
 class PokemonChar extends React.Component {
-  static propTypes = {
-    name: PropTypes.string
-  };
+  componentDidMount() {
+    this.props.getPokemon(this.props.id, this.props.name);
+  }
 
   convertToNameCase = name => {
     return name.split("-").join(" ");
@@ -63,4 +66,9 @@ class PokemonChar extends React.Component {
   }
 }
 
-export default PokemonChar;
+// const mapStateToProps
+const mapDispatchToProps = { getPokemon };
+export default connect(
+  null,
+  mapDispatchToProps
+)(PokemonChar);
