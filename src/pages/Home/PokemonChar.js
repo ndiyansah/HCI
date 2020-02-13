@@ -88,7 +88,16 @@ const DetailButton = styled(Link)`
 
 class PokemonChar extends React.Component {
   componentDidMount() {
-    this.props.getPokemon(this.props.id, this.props.detail.name);
+    if (!this.props.detail.id) {
+      this.props.getPokemon(this.props.id, this.props.detail.name);
+    }
+  }
+
+  componentWillReceiveProps(currentProps, nextProps) {
+    if (currentProps !== nextProps) {
+      nextProps.detail &&
+        this.props.getPokemon(nextProps.id, nextProps.detail.name);
+    }
   }
 
   convertToNameCase = name => {
@@ -139,7 +148,6 @@ class PokemonChar extends React.Component {
       </PokemonCard>
     );
   }
-
 }
 
 // const mapStateToProps

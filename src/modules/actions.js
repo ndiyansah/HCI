@@ -79,3 +79,24 @@ export const getPokemonTypes = () => async dispatch => {
     });
   } catch (e) {}
 };
+
+export const getPokemonByType = type => async dispatch => {
+  dispatch({
+    type: GET_POKELIST
+  });
+
+  try {
+    const response = await axios.get(`${API_URL}/type/${type}`);
+
+    const { data } = response;
+
+    dispatch({
+      type: GET_POKELIST_SUCCESS,
+      payload: {
+        total: data.pokemon.length,
+        hasNext: false,
+        data: data.pokemon.map(item => item.pokemon)
+      }
+    });
+  } catch (e) {}
+};
