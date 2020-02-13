@@ -6,6 +6,8 @@ import { bindActionCreators } from "redux";
 import PokemonChar from "./PokemonChar";
 import styled from "@emotion/styled";
 
+import FilterDropdown from "./FilterDropdown";
+
 import { PropagateLoader } from "react-spinners";
 
 const HomeWrapper = styled.div`
@@ -21,15 +23,18 @@ class Home extends React.Component {
 
   render() {
     return (
-      <HomeWrapper>
-        {this.props.pokemons.data.map((pokemon, index) => (
-          <PokemonChar detail={pokemon} id={index} key={pokemon.name} />
-        ))}
-        <PropagateLoader
-          loading={this.props.pokemons.isLoading}
-          color="#ff416c"
-        />
-      </HomeWrapper>
+      <React.Fragment>
+        <FilterDropdown />
+        <HomeWrapper>
+          {this.props.pokemons.data.map((pokemon, index) => (
+            <PokemonChar detail={pokemon} id={index} key={pokemon.name} />
+          ))}
+          <PropagateLoader
+            loading={this.props.pokemons.isLoading}
+            color="#ff416c"
+          />
+        </HomeWrapper>
+      </React.Fragment>
     );
   }
 }

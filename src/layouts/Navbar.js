@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-import FilterDropdown from "./FilterDropdown";
 
 const NavbarStyled = styled.div`
   padding: 1rem;
@@ -29,8 +28,5 @@ const NavbarLogo = styled(Link)`
 export default () => (
   <NavbarStyled>
     <NavbarLogo to="/">HCI-POKEMON</NavbarLogo>
-    <div>
-      <FilterDropdown />
-    </div>
   </NavbarStyled>
 );
