@@ -10,14 +10,17 @@ export const getPokemonDetailPage = name => async dispatch => {
     type: GET_POKEMON_DETAIL_PAGE
   });
   try {
-    const response = await axios.get(`${API_URL}/pokemon/${name}`);
+    const pokemon = await axios.get(`${API_URL}/pokemon/${name}`);
+    const specie = await axios.get(`${API_URL}/pokemon-species/${name}`);
 
-    const { data } = response;
+    const pokemonData = pokemon.data;
+    const specieData = specie.data;
 
     dispatch({
       type: GET_POKEMON_DETAIL_PAGE_SUCCESS,
       payload: {
-        data
+        data: pokemonData,
+        specie: specieData
       }
     });
   } catch (e) {}
