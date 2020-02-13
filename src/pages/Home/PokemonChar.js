@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
-
-import { Link } from "react-router-dom";
-import { getPokemon } from "../../modules/actions";
-
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { SyncLoader } from "react-spinners";
+
+import { getPokemon } from "../../modules/actions";
 
 const PokemonCard = styled.div`
   background: #fff;
@@ -32,13 +32,10 @@ const PokemonImage = styled.img`
 const PokemonInfo = styled.div`
   background: linear-gradient(to bottom right, #ee0979, #ff6a00);
   color: #fff;
-  padding: 1rem;
-  border-radius: 10px 0;
   padding: 0.2rem 1rem;
   border-top-left-radius: 10px;
   display: flex;
   justify-content: space-between;
-
 `;
 
 const PokemonName = styled.div`
@@ -74,6 +71,13 @@ const PokemonDetail = styled.div`
   }
 `;
 
+const LoadingWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+`;
+
 const DetailButton = styled(Link)`
   display: block;
   /* width: 100%; */
@@ -85,8 +89,7 @@ const DetailButton = styled(Link)`
   border-radius: 10px 0;
 `;
 
-
-class PokemonChar extends React.Component {
+class PokemonCharacter extends React.Component {
   componentDidMount() {
     if (!this.props.detail.id) {
       this.props.getPokemon(this.props.id, this.props.detail.name);
@@ -121,30 +124,38 @@ class PokemonChar extends React.Component {
           </PokemonName>
           #{this.props.detail.id}
         </PokemonInfo>
-        {this.props.detail.types && (
-          <PokemonType>
-            <small>TYPE</small>
-            <div>
-              {this.props.detail.types.map(item => (
-                <span>{item.type.name}</span>
-              ))}
-            </div>
-          </PokemonType>
-        )}
-        {this.props.detail.height && this.props.detail.weight && (
-          <PokemonDetail>
-            <div>
-              <small>HEIGHT</small>
-              <span>{this.props.detail.height / 100}m</span>
-            </div>
-            <div>
-              <small>WEIGHT</small>
-              <span>{this.props.detail.weight / 10}kg</span>
-            </div>
-          </PokemonDetail>
-        )}
+        {this.props.detail.isLoading ? (
+          <LoadingWrapper>
+            <SyncLoader size={5} color="#ff416c" />
+          </LoadingWrapper>
+        ) : (
+          <React.Fragment>
+            {this.props.detail.types && (
+              <PokemonType>
+                <small>TYPE</small>
+                <div>
+                  {this.props.detail.types.map(item => (
+                    <span>{item.type.name}</span>
+                  ))}
+                </div>
+              </PokemonType>
+            )}
+            {this.props.detail.height && this.props.detail.weight && (
+              <PokemonDetail>
+                <div>
+                  <small>HEIGHT</small>
+                  <span>{this.props.detail.height / 100}m</span>
+                </div>
+                <div>
+                  <small>WEIGHT</small>
+                  <span>{this.props.detail.weight / 10}kg</span>
+                </div>
+              </PokemonDetail>
+            )}
 
-        <DetailButton>Detail</DetailButton>
+            {this.props.detail.types && <DetailButton>Detail</DetailButton>}
+          </React.Fragment>
+        )}
       </PokemonCard>
     );
   }
@@ -155,4 +166,4 @@ const mapDispatchToProps = { getPokemon };
 export default connect(
   null,
   mapDispatchToProps
-)(PokemonChar);
+)(PokemonCharacter);
