@@ -2,7 +2,9 @@ import {
   GET_POKELIST,
   GET_POKELIST_SUCCESS,
   GET_POKEMON_DETAIL,
-  GET_POKEMON_DETAIL_SUCCESS
+  GET_POKEMON_DETAIL_SUCCESS,
+  GET_POKEMON_TYPE,
+  GET_POKEMON_TYPE_SUCCESS
 } from "./actions";
 
 const initialState = {
@@ -16,7 +18,14 @@ const initialState = {
       hasNext: false,
       total: 0
     }
-  }
+  },
+  types: {
+    isLoading: false,
+    hasError: false,
+    errorMessage: "",
+    data: []
+  },
+  filter: null
 };
 
 export default (state = initialState, action) => {
@@ -78,6 +87,24 @@ export default (state = initialState, action) => {
 
             return item;
           })
+        }
+      };
+    case GET_POKEMON_TYPE:
+      return {
+        ...state,
+        types: {
+          ...state.types,
+          isLoading: true,
+          hasError: false
+        }
+      };
+    case GET_POKEMON_TYPE_SUCCESS:
+      return {
+        ...state,
+        types: {
+          ...state.types,
+          isLoading: false,
+          data: action.payload.data
         }
       };
 
