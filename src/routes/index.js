@@ -10,7 +10,7 @@ export const Routes = () => (
   <BrowserRouter>
     <Layout>
       <Route path="/" exact component={Home} />
-      <Route path="/:slug-:id" exact component={PokemonDetail} />
+      <Route path="/:name" exact component={PokemonDetail} />
     </Layout>
   </BrowserRouter>
 );

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { bindActionCreators } from "redux";
 import PokemonChar from "./PokemonChar";
 import styled from "@emotion/styled";
 import debounce from "lodash.debounce";
@@ -70,8 +69,7 @@ const mapStateToProps = state => ({
   pokemons: state.pokemon
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getPokemonList }, dispatch);
+const mapDispatchToProps = { getPokemonList };
 
 export default connect(
   mapStateToProps,

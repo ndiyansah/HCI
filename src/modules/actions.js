@@ -16,9 +16,3 @@ export const GET_POKEMON_DETAIL_PAGE = `GET_POKEMON_DETAIL_PAGE`;
 export const GET_POKEMON_DETAIL_PAGE_SUCCESS = `GET_POKEMON_DETAIL_PAGE_SUCCESS`;
 
 export const SET_FILTER = `SET_FILTER`;
-
-export const getPokemonDetailPage = name => dispatch => {
-  dispatch({
-    type: GET_POKEMON_DETAIL_PAGE
-  });
-};
