@@ -9,12 +9,14 @@ import styled from "@emotion/styled";
 const HomeWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 class Home extends React.Component {
   componentDidMount() {
     this.props.getPokemonList();
   }
+
   render() {
     return (
       <HomeWrapper>
