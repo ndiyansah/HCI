@@ -33,6 +33,3 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Credits
-
-Warpokex [MIT license](https://ri7nz.mit-license.org/).
